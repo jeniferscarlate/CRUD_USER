@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Jenifer Scarlate">
+    <title>Sistema CRUD</title>
+</head>
+<body>
+    <script>
+        //Criando um sistema de gerenciamento de usuário
+
+        let arrUsers = [];
+
+
+        function showMenu(){
+            parent(prompt(`
+                ******Menu******
+                [1] - Cadastrar usuário
+                [2] - Listar usuário(s)
+                [3] - Atualizar usuário
+                [4] - Deletar usuário
+                [5] - Sair do programa
+            `));
+        }
+        //Método de cadastro de usuário => (Verbo HTTP: POST);
+        const addUser = () => {
+            const nameUser = prompt('Informe o nome da pessoa: ');
+            const emailUser = prompt('Informe o e-mail da pessoa: ');
+            if (!nameUser || !emailUser){
+                alert('Os campos são obrigatórios.');
+            }
+            arrUsers.push({nameUser, emailUser});
+
+            console.log(arrUsers)
+        }
+        addUser();
+
+        //Método de listagem de usuário => (Verbo HTTP: GET);
+
+        const ListUser = () => {
+            let listUser = '';
+            arrUsers.forEach((dataUser) => {
+                listUser += `Nome: ${dataUser.nameUser}, E-mail: ${dataUser.emailUser}`
+            });
+            alert(`
+            ******Lista de usuários****** 
+            ${listUser}`);
+        };
+        ListUser();
+
+        //Método de atualizar => (Verbo HTTP: PUT);
+        function UpdateUserInfo() {
+            const findEmail = prompt('Informe o e-mail que você deseja atualizar: ');
+            const usuarioEncontrado = arrUsers.find(user => user.emailUser === findEmail);
+            
+            if(!usuarioEncontrado) {
+                alert('Usuário não foi encontrtado.');
+
+                return;
+            }
+
+            // usuarioEncontrado.nameUser = (variavelNovaNome --> precisa criar)
+            // usuarioEncontrado.emailUser = (variavelNovaEmail --> precisa criar)
+
+        }
+    </script>
+</body>
+</html>
