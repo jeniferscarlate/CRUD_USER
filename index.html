@@ -9,7 +9,6 @@
 <body>
     <script>
         //Criando um sistema de gerenciamento de usuário
-
         let arrUsers = [];
 
         function showMenu(){
@@ -22,6 +21,7 @@
                 [5] - Sair do programa
             `));
         }
+
         //Método de cadastro de usuário => (Verbo HTTP: POST);
         const AddUser = () => {
             const nameUser = prompt('Informe o nome da pessoa: ');
@@ -35,11 +35,11 @@
         }
 
         //Método de listagem de usuário => (Verbo HTTP: GET);
-
         const ListUser = () => {
             let listUser = '';
             arrUsers.forEach((dataUser) => {
-                listUser += `Nome: ${dataUser.nameUser}, E-mail: ${dataUser.emailUser}`
+                listUser += `
+                Nome: ${dataUser.nameUser}, E-mail: ${dataUser.emailUser}`
             });
             alert(`
             ******Lista de usuários****** 
@@ -68,15 +68,16 @@
         //Método para Delete => Verbo HTTP (DELETE);
         function DeleteUser() {
             const deleteEmail = prompt('Informe o e-mail do usuário que você deseja deletar: ');
-            const usuarioParaDeletar = arrUsers.find(user => user.emailUser === deleteEmail);
+            const indiceDelete = arrUsers.findIndex(email => email.emailUser === deleteEmail);
+
             const confirmacao = window.confirm(`Você realmente deseja excluir o usuário ${deleteEmail}?`);
 
-            if(!usuarioParaDeletar) {
+            if(!indiceDelete) {
                 alert('O usuário não foi encontrado.');
             }
 
-            if (usuarioParaDeletar) {
-                arrUsers.splice(usuarioParaDeletar, 1);
+            if (confirmacao) {
+                arrUsers.splice(indiceDelete, 1);
             }
             alert('O usuário foi deletado com sucesso.');
         }
